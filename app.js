@@ -1,35 +1,57 @@
 const arrows = document.querySelectorAll(".arrow");
 const movieLists = document.querySelectorAll(".movie-list");
 
-arrows.forEach((arrow, i) => {
+arrows.forEach((arrow,i) => {
   const itemNumber = movieLists[i].querySelectorAll("img").length;
   let clickCounter = 0;
   arrow.addEventListener("click", () => {
-    const ratio = Math.floor(window.innerWidth / 270);
+    const ratio = Math.floor(window.innerWidth /270);
     clickCounter++;
     if (itemNumber - (4 + clickCounter) + (4 - ratio) >= 0) {
-      movieLists[i].style.transform = `translateX(${
-        movieLists[i].computedStyleMap().get("transform")[0].x.value - 300
+        movieLists[i].style.transform = `translateX(${
+          movieLists[i].computedStyleMap().get("transform")[0].x.value
+        -330
       }px)`;
     } else {
       movieLists[i].style.transform = "translateX(0)";
       clickCounter = 0;
-    }
+    };
   });
 
-  console.log(Math.floor(window.innerWidth / 270));
+  console.log(Math.floor(window.innerWidth/270));
 });
 
-//TOGGLE
 
+
+//TOGGLE 
 const ball = document.querySelector(".toggle-ball");
 const items = document.querySelectorAll(
   ".container,.movie-list-title,.navbar-container,.sidebar,.left-menu-icon,.toggle"
-);
+)
 
-ball.addEventListener("click", () => {
-  items.forEach((item) => {
-    item.classList.toggle("active");
-  });
-  ball.classList.toggle("active");
+ball.addEventListener("click",()=>{
+    items.forEach(item=>{
+      item.classList.toggle("active")
+    })
+    ball.classList.toggle("active")
+})
+// swiper
+var swiper = new Swiper(".home-swiper", {
+  spaceBetween: 30,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
 });
+
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+}
